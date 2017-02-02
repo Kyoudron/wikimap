@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WikiMaps</title>
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/create.css" type="text/css" />
+
+  </head>
+  <body>
+    <nav id="nav-bar">
+      <span class="header">WikiMaps</span>
+      <span class="profile"> Profile </span>
+      <span class="create"> Create </span>
+      <span class="logout"> Logout </span>
+    </nav>
+  </body>
+
+<!-- <img src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap"> -->
+<!--  <body>
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var labelIndex = 0;
+
+      function initialize() {
+        var bangalore = { lat: 12.97, lng: 77.59 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: bangalore
+        });
+
+        // This event listener calls addMarker() when the map is clicked.
+        google.maps.event.addListener(map, 'click', function(event) {
+          addMarker(event.latLng, map);
+        });
+
+        // Add a marker at the center of the map.
+        addMarker(bangalore, map);
+      }
+
+      // Adds a marker to the map.
+      function addMarker(location, map) {
+        // Add the marker at the clicked location, and add the next-available label
+        // from the array of alphabetical characters.
+        var marker = new google.maps.Marker({
+          position: location,
+          label: labels[labelIndex++ % labels.length],
+          map: map
+        });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+</body> -->
+<div id="map"></div>
+
+<!-- Replace the value of the key parameter with your own API key. -->
+
+<script async defer
+
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap">
+
+</script>
+
+</html>
