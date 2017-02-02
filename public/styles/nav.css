@@ -1,0 +1,59 @@
+
+nav {
+  margin: 0 0;
+  background: teal;
+  padding: 1% 2% 2% 2%;
+}
+
+nav .header{
+  color: black;
+  font-size: 250%
+}
+
+#nav-bar .profile {
+  float: right;
+  margin: 1px 1px;
+  padding: 2% 2%;
+  background: white;
+  border: solid black 1px;
+}
+
+#nav-bar .create {
+  float: right;
+  margin: 1px 1px;
+  padding: 2% 2%;
+  background: white;
+  border: solid black 1px;
+}
+
+#nav-bar .logout {
+  float: right;
+  margin: 1px 1px;
+  padding: 2% 2%;
+  background: white;
+  border: solid black 1px;
+}
+
+#nav-bar .profile:hover {
+  float: right;
+  margin: 1px 1px;
+  padding: 2% 2%;
+  background: cyan;
+  border: solid black 1px;
+}
+
+#nav-bar .create:hover {
+  float: right;
+  margin: 1px 1px;
+  padding: 2% 2%;
+  background: cyan;
+  border: solid black 1px;
+}
+
+#nav-bar .logout:hover {
+  float: right;
+  margin: 1px 1px;
+  padding: 2% 2%;
+  background: cyan;
+  border: solid black 1px;
+}
