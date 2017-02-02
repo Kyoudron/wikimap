@@ -47,6 +47,14 @@ app.get("/create", (req, res) => {
   res.render("create");
 });
 
+app.get("/view", (req, res) =>{
+  res.render("viewedit");
+})
+
+app.get("/profile", (req, res) =>{
+  res.render("profile");
+})
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
