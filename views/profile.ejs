@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>WikiMaps</title>
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-    <body>
-      <nav id="nav-bar">
-        <span class="header">WikiMaps</span>
-        <span class="profile"> Profile </span>
-        <span class="create"> Create </span>
-        <span class="logout"> Logout </span>
-      </nav>
-    </body>
+    <link rel="stylesheet" href="/styles/profile.css" type="text/css" />
   </head>
+  <body>
+    <% include ./partials/_header %>
+    <table id ="profile_table">
+      <td>
+        <tr>
+          <h2>My Maps</h2>
+          <img src="http://www.placehold.it/200x200">
+        </tr>
+        <tr>
+          <h2>Contributions</h2>
+          <img src="http://www.placehold.it/200x200">
+        </tr>
+        <tr>
+          <h2>Favourites</h2>
+          <img src="http://www.placehold.it/200x200">
+        </tr>
+      </td>
+      <td>
+      </td>
+    </table>
+  </body>
 </html>
 
