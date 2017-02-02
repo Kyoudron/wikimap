@@ -40,6 +40,15 @@ navigator.geolocation.getCurrentPosition(function(position) {
       let marker = new google.maps.Marker({
         position: location,
         map: map
+        })
+
+        marker.addListener('click', function() {
+          let contentString = '<div>Hello World!</div>';
+          let infoWindow = new google.maps.InfoWindow({
+            content: contentString
+          })
+          infoWindow.open(map, marker);
+
       })
     }
     addMarker(event.latLng);
@@ -51,13 +60,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
   // add in title, description image from customizable infoWindow
 
 
-    marker.addListener('click', function() {
-      let contentString = '<div>Hello World!</div>';
-      let infoWindow = new google.maps.InfoWindow({
-        content: contentString
-      })
-      infoWindow.open(map, marker);
-    });
+
 
       // click on marker displays infoWindow
 
