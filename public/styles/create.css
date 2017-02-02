@@ -1,8 +1,13 @@
-      #map {
-        height: 100%;
-      }
-      html, body {
-        height: 75%;
-        margin: 0 5px;
-        padding: 0;
-      }
+#map {
+  height: 100%;
+}
+
+html, body {
+  height: 75%;
+  padding: 0;
+}
+
+html #createmap {
+  margin: 0 5%;
+}
+
