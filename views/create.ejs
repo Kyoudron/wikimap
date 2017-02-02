@@ -11,13 +11,24 @@
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/create.css" type="text/css" />
 
+
+  </head>
+  <body>
+
+
     <nav id="nav-bar">
       <span class="header">WikiMaps</span>
       <span class="profile"> Profile </span>
       <span class="create"> Create </span>
       <span class="logout"> Logout </span>
     </nav>
+  </body>
 
+
+<!-- <img src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap"> -->
+<!--  <body>
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+=======
 
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -29,13 +40,14 @@
     <script id="createmap">
 
       var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+>>>>>>> c29f009ff0710f9f140e299dce099816b7de817c
       var labelIndex = 0;
 
       function initialize() {
-        var toronto = { lat: 43.68, lng:-73.69 };
+        var bangalore = { lat: 12.97, lng: 77.59 };
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 12,
-          center: toronto
+          center: bangalore
         });
 
         // This event listener calls addMarker() when the map is clicked.
@@ -44,7 +56,7 @@
         });
 
         // Add a marker at the center of the map.
-        addMarker(toronto, map);
+        addMarker(bangalore, map);
       }
 
       // Adds a marker to the map.
@@ -59,7 +71,11 @@
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
+<<<<<<< HEAD
+</body> -->
+
     </script>
+
 
 
 
