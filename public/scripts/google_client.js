@@ -1,7 +1,12 @@
 
 // initializing map
 
+const markers = {};
+
 function initMap() {
+
+  // defining the working object that is passed to the database upon saving
+
   let lighthouse = {lat: 43.6446249, lng: -79.39519729999999};
   let map = new google.maps.Map(document.getElementById('map'), {
     center: lighthouse,
@@ -30,8 +35,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
   } else {
     handleLocationError(false, infoWindow, map.getCenter());
   }
-  // defining the working object that is passed to the database upon saving
-  let markers = {};
 
   // marker generating event listener on double click
 
@@ -42,14 +45,26 @@ navigator.geolocation.getCurrentPosition(function(position) {
         map: map
         })
 
-        marker.addListener('click', function() {
-          let contentString = '<div>Hello World!</div>';
-          let infoWindow = new google.maps.InfoWindow({
-            content: contentString
-          })
-          infoWindow.open(map, marker);
+// let newMarker = function(location)
 
+        marker.addListener('click', function(event) {
+
+
+          let userHTML = "<table>" +
+                 "<tr><td>Title:</td> <td><input type='text' id='title'/> </td> </tr>" +
+                 "<tr><td>Description:</td> <td><input type='text' id='description'/></td> </tr>" +
+                 "<tr><td>Image:</td> <td><input type='file' id='image'/></td> </tr>" +
+                 "<tr><td></td><td><input class='markerSubmit' type='button' value='Save & Close'/></td></tr>" + "</table>";
+         let userInfoWindow = new google.maps.InfoWindow({
+            content: userHTML
+          })
+          userInfoWindow.open(map, marker);
+
+          $(".markerSubmit").click(() => saveData(location));
       })
+
+
+
     }
     addMarker(event.latLng);
   });
@@ -69,11 +84,18 @@ navigator.geolocation.getCurrentPosition(function(position) {
   // }
   //
   //
-  //
 
 
 
 }
+
+function saveData(location) {
+  let title = escape(document.getElementById('title').value);
+  let description = escape(document.getElementById('description').value);
+  let image = escape(document.getElementById('image').value);
+  let latlng = location;
+  markers[JSON.stringify(latlng)] = {markerTitle: title, markerDescription: description, markerImage: image, markerCoordinates: latlng.toJSON()};
+}  //
 
 $(function() {
   initMap();
