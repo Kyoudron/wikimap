@@ -11,22 +11,38 @@
   </head>
   <body>
     <% include ./partials/_header %>
-    <div id="map"></div>
-    <!-- action needs to be changed -->
-<!--     <form id ="search-address" method="POST" action="/create">
-      <textarea id="textarea" placeholder="Type an address..."></textarea>
-      <input id= "submitbutton" type="submit" value="Go!"></input>
-    </form> -->
-    <form id ="mapTitle">
-      <textarea id="mapTitleText" placeholder="Your title here"></textarea>
-      <input id= "saveTitle" type="submit" value="Save Map"></input>
-    </form>
-<!-- Not sure if we need this after Adrien's commit -->
-<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap">
-</script> -->
-  </body>
+    
+    <!-- Page Content -->
+    <div class="container">
 
-  <div id="map"></div>
+         <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Create a Map
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+            <div>
+              <div id="map"></div>
+            </div>
+        </div>
+        
+        <div id="mapname">
+          <h3>
+              <a href="#">Map Name</a>
+          </h3>
+          <p>
+            <form id ="mapTitle" method="POST" action="/profile">
+              <textarea id="mapTitleText" placeholder="Your title here"></textarea>
+              <input id= "saveTitle" type="submit" value="Submit"></input>
+            </form>
+          </p>
+        </div>
+  </body>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -39,6 +55,26 @@
 
 <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap"></script> -->
 
+        <hr>
 
-  </body>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Wikimap 2017</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
 </html>
