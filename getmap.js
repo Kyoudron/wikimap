@@ -14,16 +14,15 @@
     },
   });
 
-  const m = `
-    SELECT * FROM markers
+  const title = `
+    SELECT * FROM maps
   `
-  data.query(m, (err, result) => {
-    if (err) {
+  data.query(title, (err, result) => {
+      if (err) {
       return console.error("error running query", err);
     }
-    for(value of result.rows) {
-     console.log(value.latitude, value.longitude)
+      for(mapTitle of result.rows) {
+     console.log(mapTitle.title)
    }
      process.exit();
-  });
-
+  })
