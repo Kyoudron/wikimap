@@ -37,7 +37,8 @@ app.use(express.static("public"));
 
 // // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
-app.use("/api/maps", mapsRoutes(knex));
+app.use("/maps", mapsRoutes(knex));
+// app.use(createRoutes(knex)); // what's up with the /api/maps
 
 // HOME PAGE
 app.get("/", (req, res) => {
@@ -46,7 +47,7 @@ app.get("/", (req, res) => {
 
 
 //CREATE PAGE
-app.get("/create", (req, res) => {
+app.get("/maps/new", (req, res) => {
   res.render("create");
 });
 
@@ -57,42 +58,6 @@ app.get("/view", (req, res) => {
 app.get("/profile", (req, res) => {
   res.render("profile");
 });
-
-app.post("/create", (req, res) => {
-
-    console.log('Posting to server ...');
-
-    console.log(req.body);
-
-    knex('maps').insert(
-      {title: req.body.mapTitle}
-      // {creator_id: req.body.user_id}
-    );
-    for (let i in req.body.markers) {
-      console.log(req.body.markers[i])
-      knex('markers').insert(
-        {title: req.body.markers[i].markerTitle},
-        {description: req.body.markers[i].markerDescription},
-        {img: req.body.markers[i].markerImage},
-        {latitude: req.body.markers[i].markerCoordinates.lat},
-        {longitude: req.body.markers[i].markerCoordinates.lng}
-        // {map_id: knex.from('maps').innerJoin('map_id', 'title', req.body.mapTitle)},
-        // {user_id: req.body.user_id}
-      );
-    }
-});
-
-app.post("/create", (req, res) => {
-  console.log("some text")
-  console.log(req.body)
-
-	//need some variables passed in here
-	// let templateVars = {
-	// 		map : req.body.map
-	// }
-
-	res.redirect("/profile");
-})
 
 
 app.listen(PORT, () => {

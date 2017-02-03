@@ -108,7 +108,7 @@ $(function() {
       markers: markers
     }
 
-    $.ajax('/create', {method: "post", data: formData})
+    $.ajax('/maps', {method: "post", data: formData})
   })
 
 // console.log(mapTitle)

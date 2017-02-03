@@ -2,11 +2,12 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/api/maps"
-  }).done((maps) => {
+  })
+    .done((maps) => {
     for (let map of maps) {
       $("<div>").text(map.title).appendTo($("body"));
     }
-  });;
+  });
 
 
 
