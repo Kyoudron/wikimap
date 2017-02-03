@@ -1,92 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>WikiMaps</title>
-
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/create.css" type="text/css" />
-
-
   </head>
   <body>
-
-
-    <nav id="nav-bar">
-      <span class="header">WikiMaps</span>
-      <span class="profile"> Profile </span>
-      <span class="create"> Create </span>
-      <span class="logout"> Logout </span>
-    </nav>
+    <% include ./partials/_header %>
+    <div id="map"></div>
+    <!-- action needs to be changed -->
+    <form id ="search-address" method="POST" action="/create">
+      <textarea id="textarea" placeholder="Type an address..."></textarea>
+      <input id= "submitbutton" type="submit" value="Go!"></input>
+    </form>
+    <form id ="mapTitle" method="POST" action="/create">
+      <textarea id="mapTitleText" placeholder="Your title here"></textarea>
+      <input id= "saveTitle" type="submit" value="Save"></input>
+    </form>
+<!-- Not sure if we need this after Adrien's commit -->
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap">
+</script> -->
   </body>
 
+  <div id="map"></div>
 
-<!-- <img src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap"> -->
-<!--  <body>
-var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-=======
-
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap"></script>
-
-
-  </head>
-
-    <script id="createmap">
-
-      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
->>>>>>> c29f009ff0710f9f140e299dce099816b7de817c
-      var labelIndex = 0;
-
-      function initialize() {
-        var bangalore = { lat: 12.97, lng: 77.59 };
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: bangalore
-        });
-
-        // This event listener calls addMarker() when the map is clicked.
-        google.maps.event.addListener(map, 'click', function(event) {
-          addMarker(event.latLng, map);
-        });
-
-        // Add a marker at the center of the map.
-        addMarker(bangalore, map);
-      }
-
-      // Adds a marker to the map.
-      function addMarker(location, map) {
-        // Add the marker at the clicked location, and add the next-available label
-        // from the array of alphabetical characters.
-        var marker = new google.maps.Marker({
-          position: location,
-          label: labels[labelIndex++ % labels.length],
-          map: map
-        });
-      }
-
-      google.maps.event.addDomListener(window, 'load', initialize);
-<<<<<<< HEAD
-</body> -->
-
-    </script>
-
-
-
-
-<div id="map"></div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk"></script>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/google_client.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap"></script>
 
 <!-- Replace the value of the key parameter with your own API key. -->
 
-<script async defer
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap"></script> -->
 
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap">
 
-</script>
-
+  </body>
 </html>
