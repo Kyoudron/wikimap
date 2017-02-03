@@ -47,13 +47,21 @@ app.get("/create", (req, res) => {
   res.render("create");
 });
 
-app.get("/view", (req, res) =>{
+app.get("/view", (req, res) => {
   res.render("viewedit");
-})
+});
 
-app.get("/profile", (req, res) =>{
+app.get("/profile", (req, res) => {
   res.render("profile");
-})
+});
+
+app.post("/create", (req, res) => {
+    console.log('Posting to server ...');
+    knex('maps').insert({title: req.body.title}, {creator_id: req.body.user_id})
+    for (let i in req.body.markers) {
+      knex('markers').insert({title)
+    }
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
