@@ -95,7 +95,7 @@ $(function() {
   initMap();
 
   $('#mapTitle').on('submit', function(event) {
-    // event.preventDefault();
+    event.preventDefault();
     // if ($('#mapTitleText').val() === "") {
     //   alert("Please give your map a title!")
     //   return;
