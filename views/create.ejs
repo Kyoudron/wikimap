@@ -13,13 +13,13 @@
     <% include ./partials/_header %>
     <div id="map"></div>
     <!-- action needs to be changed -->
-    <form id ="search-address" method="POST" action="/create">
+<!--     <form id ="search-address" method="POST" action="/create">
       <textarea id="textarea" placeholder="Type an address..."></textarea>
       <input id= "submitbutton" type="submit" value="Go!"></input>
-    </form>
-    <form id ="mapTitle" method="POST" action="/create">
+    </form> -->
+    <form id ="mapTitle">
       <textarea id="mapTitleText" placeholder="Your title here"></textarea>
-      <input id= "saveTitle" type="submit" value="Save"></input>
+      <input id= "saveTitle" type="submit" value="Save Map"></input>
     </form>
 <!-- Not sure if we need this after Adrien's commit -->
 <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap">
@@ -33,6 +33,7 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/google_client.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap"></script>
+  <script type="text/javascript" src="/scripts/save_title.js"></script>
 
 <!-- Replace the value of the key parameter with your own API key. -->
 
