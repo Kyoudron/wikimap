@@ -83,9 +83,9 @@ function saveData(location) {
   let description = escape(document.getElementById('description').value);
   let image = escape(document.getElementById('image').value);
   let latlng = location;
-  markers[JSON.stringify(latlng)] = {markerTitle: title, 
-                                    markerDescription: description, 
-                                    markerImage: image, 
+  markers[JSON.stringify(latlng)] = {markerTitle: title,
+                                    markerDescription: description,
+                                    markerImage: JSON.stringify(image),
                                     markerCoordinates: latlng.toJSON()};
 }
 
@@ -108,7 +108,7 @@ $(function() {
       markers: markers
     }
 
-    $.ajax('/create', {method: "post", data: JSON.stringify(formData)})
+    $.ajax('/create', {method: "post", data: formData})
   })
 
 // console.log(mapTitle)
