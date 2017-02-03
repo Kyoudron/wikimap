@@ -38,11 +38,13 @@ app.use(express.static("public"));
 // // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
-// Home page
+// HOME PAGE
 app.get("/", (req, res) => {
   res.render("index");
 });
 
+
+//CREATE PAGE
 app.get("/create", (req, res) => {
   res.render("create");
 });
@@ -75,6 +77,20 @@ app.post("/create", (req, res) => {
     }
 });
 
+app.post("/create", (req, res) => {
+  console.log("some text")
+  console.log(req.body)
+
+	//need some variables passed in here
+	// let templateVars = {
+	// 		map : req.body.map
+	// }
+
+	res.redirect("/profile");
+})
+
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+

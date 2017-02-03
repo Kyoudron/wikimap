@@ -1,6 +1,6 @@
 
 // defining the working object that is passed to the database upon saving
-
+const map = {};
 const markers = {};
 
 // initializing map
@@ -72,14 +72,43 @@ navigator.geolocation.getCurrentPosition(function(position) {
   });
 }
 
+// function saveMapTitle(mapTitle) {
+//   let mapTitle = escape(document.getElementById('mapTitle').value)
+//   return mapTitle;
+// }
+
 function saveData(location) {
   let title = escape(document.getElementById('title').value);
   let description = escape(document.getElementById('description').value);
   let image = escape(document.getElementById('image').value);
   let latlng = location;
-  markers[JSON.stringify(latlng)] = {markerTitle: title, markerDescription: description, markerImage: image, markerCoordinates: latlng.toJSON()};
+  markers[JSON.stringify(latlng)] = {markerTitle: title, 
+                                    markerDescription: description, 
+                                    markerImage: image, 
+                                    markerCoordinates: latlng.toJSON()};
 }
 
+
+//ON DOC READY
 $(function() {
   initMap();
+
+  $('#mapTitle').on('submit', function(event) {
+    // event.preventDefault();
+    // if ($('#mapTitleText').val() === "") {
+    //   alert("Please give your map a title!")
+    //   return;
+    // };
+    let mapTitle = $('#mapTitleText').val();
+    // //modify map obj
+    // map[JSON.stringify(mapTitle)] = markers;
+    const formData = {
+      mapTitle: mapTitle,
+      markers: markers
+    }
+
+    $.ajax('/create', {method: "post", data: JSON.stringify(formData)})
+  })
+
+// console.log(mapTitle)
 });
