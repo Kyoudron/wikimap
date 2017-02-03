@@ -58,20 +58,24 @@ app.get("/profile", (req, res) => {
 });
 
 app.post("/create", (req, res) => {
+
     console.log('Posting to server ...');
+
     console.log(req);
+
     knex('maps').insert(
-      {title: req.body.title},
+      {title: req.body.mapTitle},
       {creator_id: req.body.user_id}
     );
     for (let i in req.body.markers) {
+      console.log(req.body.markers[i])
       knex('markers').insert(
-        {title: req.body.markers[i].title},
-        {description: req.body.markers[i].description},
-        {img: req.body.markers[i].img},
-        {latitude: req.body.markers[i].coordinates.lat},
-        {longitude: req.body.markers[i].coordinates.lng},
-        {map_id: knex.from('maps').innerJoin('map_id', 'title', req.body.title)},
+        {title: req.body.markers[i].markerTitle},
+        {description: req.body.markers[i].markerDescription},
+        {img: req.body.markers[i].markerImage},
+        {latitude: req.body.markers[i].markerCoordinates.lat},
+        {longitude: req.body.markers[i].markerCoordinates.lng},
+        {map_id: knex.from('maps').innerJoin('map_id', 'title', req.body.mapTitle)},
         {user_id: req.body.user_id}
       );
     }
@@ -93,4 +97,3 @@ app.post("/create", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
-
