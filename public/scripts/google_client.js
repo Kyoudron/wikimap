@@ -61,7 +61,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
         let userInfoWindow = new google.maps.InfoWindow({
           content: userHTML
         })
-        
+
         userInfoWindow.open(map, marker);
         infoWindow.close();
 
