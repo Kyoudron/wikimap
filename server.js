@@ -65,7 +65,7 @@ app.post("/create", (req, res) => {
     console.log(req.body);
 
     knex('maps').insert(
-      {title: req.body.mapTitle},
+      {title: req.body.mapTitle}
       // {creator_id: req.body.user_id}
     );
     for (let i in req.body.markers) {
@@ -75,7 +75,7 @@ app.post("/create", (req, res) => {
         {description: req.body.markers[i].markerDescription},
         {img: req.body.markers[i].markerImage},
         {latitude: req.body.markers[i].markerCoordinates.lat},
-        {longitude: req.body.markers[i].markerCoordinates.lng},
+        {longitude: req.body.markers[i].markerCoordinates.lng}
         // {map_id: knex.from('maps').innerJoin('map_id', 'title', req.body.mapTitle)},
         // {user_id: req.body.user_id}
       );
