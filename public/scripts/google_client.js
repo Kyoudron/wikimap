@@ -83,10 +83,14 @@ function saveData(location) {
   let description = escape(document.getElementById('description').value);
   let image = escape(document.getElementById('image').value);
   let latlng = location;
-  markers[JSON.stringify(latlng)] = {markerTitle: title,
-                                    markerDescription: description,
-                                    markerImage: JSON.stringify(image),
-                                    markerCoordinates: latlng.toJSON()};
+  markers[JSON.stringify(latlng)] = {
+    markerTitle: title,
+    markerDescription: description,
+    markerImage: JSON.stringify(image),
+    markerCoordinates: latlng.toJSON(),
+    mapId: 1,
+    userId: 2
+  };
 }
 
 
@@ -95,7 +99,7 @@ $(function() {
   initMap();
 
   $('#mapTitle').on('submit', function(event) {
-    // event.preventDefault();
+    event.preventDefault();
     // if ($('#mapTitleText').val() === "") {
     //   alert("Please give your map a title!")
     //   return;
@@ -108,7 +112,7 @@ $(function() {
       markers: markers
     }
 
-    $.ajax('/create', {method: "post", data: formData})
+    $.ajax('/maps', {method: "post", data: formData})
   })
 
 // console.log(mapTitle)
