@@ -88,18 +88,20 @@ function saveData(location) {
 
   let latlng = location;
     markers[JSON.stringify(latlng)] = {
-    markerTitle: title,
-    markerDescription: description,
-    markerImage: JSON.stringify(image),
-    markerCoordinates: latlng.toJSON(),
-    mapId: 1,
-    userId: 2
+    title: title,
+    description: description,
+    img: JSON.stringify(image),
+    latitude: (latlng.toJSON()).lat,
+    longitude: (latlng.toJSON()).lng,
+    map_id: 0,
+    user_id: 0
   };
-
+}
 
 
 //ON DOC READY
 $(function() {
+
   initMap();
 
   $('#mapTitle').on('submit', function(event) {
@@ -117,7 +119,16 @@ $(function() {
     }
 
     $.ajax('/maps', {method: "post", data: formData})
+
   })
 
-// console.log(mapTitle)
+$('#savemarkers').on('click', function(event) {
+  event.preventDefault();
+  const formData = {
+    markers: markers
+  }
+
+  $.ajax('maps/:id', {method: "post", data: formData})
+  })
+
 });
