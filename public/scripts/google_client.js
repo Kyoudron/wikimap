@@ -83,10 +83,14 @@ function saveData(location) {
   let description = escape(document.getElementById('description').value);
   let image = escape(document.getElementById('image').value);
   let latlng = location;
-  markers[JSON.stringify(latlng)] = {markerTitle: title,
-                                    markerDescription: description,
-                                    markerImage: JSON.stringify(image),
-                                    markerCoordinates: latlng.toJSON()};
+  markers[JSON.stringify(latlng)] = {
+    markerTitle: title,
+    markerDescription: description,
+    markerImage: JSON.stringify(image),
+    markerCoordinates: latlng.toJSON(),
+    mapId: 1,
+    userId: 2
+  };
 }
 
 

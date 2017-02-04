@@ -15,6 +15,14 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/", (req, res) => {
+    knex
+      .select("*")
+      .from("markers")
+      .then((results) => {
+        res.json(results);
+    });
+  });
 
 
   router.post("/", (req, res) => {
@@ -22,22 +30,46 @@ module.exports = (knex) => {
     knex('maps')
       .insert (
       {title: req.body.mapTitle, creator_id: 2})
-  // for (let i in req.body.markers) {
-  //   knex('markers')
-  //     .insert (
-  //       {title: req.body.markers[i].markerTitle},
-  //       {description: req.body.markers[i].markerDescription},
-  //       {img: req.body.markers[i].markerImage},
-  //       {latitude: req.body.markers[i].markerCoordinates.lat},
-  //       {longitude: req.body.markers[i].markerCoordinates.lng})
-      // {map_id: knex.from('maps').innerJoin('map_id', 'title', req.body.mapTitle)},
-      // {user_id: req.body.user_id}
       .then((results) => {
       res.json({ success: true, message: 'ok' });
     })
 
+      // for (let i of req.body.markers) {
+      //   knex('markers').insert (
+      //     {title: req.body.markers[i].markerTitle},
+      //     {description: req.body.markers[i].markerDescription},
+      //     {img: req.body.markers[i].markerImage},
+      //     {latitude: req.body.markers[i].markerCoordinates.lat},
+      //     {longitude: req.body.markers[i].markerCoordinates.lng},
+      //     {map_id: 1},
+      //     {user_id: 1})
+      //     .then((results) => {
+      //     res.json({ success: true, message: 'ok' });
+      //   })
+      // }
+
+
+
   });
 
+  // router.post("/", (req, res) => {
+  //   // for (let i in req.body.markers) {
+  //     knex('markers')
+  //       .insert (
+  //         {title: req.body.markers.markerTitle},
+  //         {description: req.body.markers.markerDescription},
+  //         {img: req.body.markers.markerImage},
+  //         {latitude: req.body.markers.markerCoordinates.lat},
+  //         {longitude: req.body.markers.markerCoordinates.lng},
+  //         {map_id: 1},
+  //         {user_id: 1})
+  //       // {map_id: knex.from('maps').innerJoin('map_id', 'title', req.body.mapTitle)},
+  //       // {user_id: req.body.user_id}
+  //       .then((results) => {
+  //         res.json({ success: true, message: 'markers uploaded to db'});
+  //     })
+  //   // }
+  // })
 
   return router;
 }
