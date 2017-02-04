@@ -21,9 +21,10 @@
                 <h1 class="page-header"><%= `Welcome - ${mapId}: You can add markers below!` %>  <!-- gonna change to user name --></h1>
             </div>
             <div class="textbox">
-              <form id ="savemarkers" method="POST" action="/profile">
+              <form id ="savemarkers" method="POST" action="/maps/<%mapId%>">
                 <input type="submit" value="Save"></input>
               </form>
+              <br /><br /><br />
             </div>
         <!-- /.row -->
 

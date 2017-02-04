@@ -37,17 +37,21 @@ module.exports = (knex) => {
   });
 
   router.post("/maps/:id", (req, res) => {
+
     let markerArr = [];
-    for (let i in req.body.markers) {
-      req.body.markers[i].user_id = req.session.user_id;
-      req.body.markers[i].map_id = req.params.id;
-      markerArr.push(req.body.markers[i]);
+    for (let obj in (req.body.markers)) {
+      req.body.markers[obj].user_id = req.cookie;
+      req.body.markers[obj].map_id = req.params.id;
+      markerArr.push(req.body.markers[obj]);
     }
+
+      console.log(markerArr);
+
 
     let chunkSize = markerArr.length;
 
     knex.batchInsert('markers', markerArr, chunkSize)
-      .returning('id')
+      .returning('*')
       .then(function() {
         console.log('Insert is working!')
       })
@@ -55,16 +59,7 @@ module.exports = (knex) => {
         console.log(error)
       });
 
-    knex.transaction(function(tr) {
-      return knex.batchInsert('markers', markerArr, chunkSize)
-        .transacting(tr)
-      })
-      .then (function() {
-        console.log('Insert is working!')
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
+    
   })
 
 
