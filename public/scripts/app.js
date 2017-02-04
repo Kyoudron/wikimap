@@ -6,11 +6,41 @@ $(() => {
     })
     .done((maps) => {
     html = '';
-    for(map of maps) {
+    for(let map of maps) {
       html += createMapElement(map);
     }
     $('.map-list').html(html);
   });
+
+$.ajax({
+    method: "GET",
+    url: "/api/profilemaps"
+    })
+    .done((maps) => {
+    html = '';
+    for(let map of maps) {
+      html += profileMapElement(map);
+    }
+    $('.maprow').html(html);
+  });
+
+
+  function profileMapElement(map){
+    let title = map.title;
+
+    let html = `
+            <div class="col-md-4 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                </a>
+                <h3>
+                    <a href="maps/<%mapId%>">${title}</a>
+                </h3>
+                <p></p>
+            </div>`
+
+    return html;
+  }
 
 
   function createMapElement(map){
@@ -22,7 +52,7 @@ $(() => {
                     <img class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
                 <h3>
-                    <a href="#">${title}</a>
+                    <a href="maps/<%mapId%>">${title}</a>
                 </h3>
                 <p></p>
             </div>`
