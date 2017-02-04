@@ -95,11 +95,12 @@ function saveData(location) {
     mapId: 1,
     userId: 2
   };
-
+}
 
 
 //ON DOC READY
 $(function() {
+
   initMap();
 
   $('#mapTitle').on('submit', function(event) {
@@ -117,7 +118,7 @@ $(function() {
     }
 
     $.ajax('/maps', {method: "post", data: formData})
+
   })
 
-// console.log(mapTitle)
 });
