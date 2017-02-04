@@ -40,7 +40,7 @@ module.exports = (knex) => {
 
     let markerArr = [];
     for (let obj in (req.body.markers)) {
-      req.body.markers[obj].user_id = req.cookie;
+      req.body.markers[obj].user_id = req.cookie['cookieName'];
       req.body.markers[obj].map_id = req.params.id;
       markerArr.push(req.body.markers[obj]);
     }
@@ -59,7 +59,7 @@ module.exports = (knex) => {
         console.log(error)
       });
 
-    
+
   })
 
 
