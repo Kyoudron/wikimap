@@ -36,7 +36,7 @@ module.exports = (knex) => {
     })
   });
 
-  router.post("/maps/:id" (req, res) => {
+  router.post("/maps/:id", (req, res) => {
     let markerArr = [];
     for (let i in req.body.markers) {
       req.body.markers[i].user_id = req.session.user_id;
