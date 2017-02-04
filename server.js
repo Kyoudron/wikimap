@@ -29,10 +29,6 @@ const markersRoutes = require("./routes/markers");
 const users_mapsRoutes = require("./routes/users_maps");
 const profileMaps = require("./routes/profilemaps");
 
-
-const markersRoutes = require("./routes/markers");
-const users_mapsRoutes = require("./routes/users_maps");
-
 // const checkIfLoggedIn = require("./routes/checkIfLoggedIn");
 
 
@@ -122,10 +118,11 @@ app.get("/view", (req, res) => {
   res.render("viewedit", templateVars);
 })
 
-app.get("/profile", (req, res) => {
+app.get("/profile/:id", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
-    loggedIn: loggedIn
+    loggedIn: loggedIn,
+    profileId: req.params.id,
   }
   res.render("profile", templateVars);
 })
