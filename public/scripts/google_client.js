@@ -132,9 +132,9 @@ $(function() {
       markers: markers
     }
 
-<<<<<<< HEAD
+
     $.ajax('/create', {method: "post", data: JSON.stringify(formData)})
-=======
+
     $.ajax('/maps', {method: "post", data: formData})
 
   })
@@ -146,7 +146,7 @@ $('#savemarkers').on('click', function(event) {
   }
 
   $.ajax('maps/:id', {method: "post", data: formData})
->>>>>>> f0fe2de3a026eb0a6f4705f655c040e9cfcfd3fc
+
   })
 
 });
