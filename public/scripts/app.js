@@ -6,7 +6,7 @@ $(() => {
     })
     .done((maps) => {
     html = '';
-    for(map of maps) {
+    for (let map of maps) {
       html += createMapElement(map);
     }
     $('.map-list').html(html);
