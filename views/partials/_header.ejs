@@ -25,9 +25,15 @@
                         <a href="/profile">Profile</a>
                     </li>
                     <li>
-                        <a href="#">Logout</a>
+                        <% if (loggedIn === false) { %>
+                        <a href="/login">Login</a>
+                        <% } if (loggedIn === true) { %>
+                            <form id="logout" method = "POST" action ="/logout">
+                                <button type ="submit" form="logout"  class = "btn btn-default btn-sm" style="margin-top: 10.5px">Logout</button>
+                            </form>
+                        <% } %>
                     </li>
-                </ul>
+                </ul>   
             </div>
             <!-- /.navbar-collapse -->
         </div>
