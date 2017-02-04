@@ -33,43 +33,38 @@ module.exports = (knex) => {
       .then((results) => {
       res.json({ success: true, message: 'ok' });
     })
-
-      // for (let i of req.body.markers) {
-      //   knex('markers').insert (
-      //     {title: req.body.markers[i].markerTitle},
-      //     {description: req.body.markers[i].markerDescription},
-      //     {img: req.body.markers[i].markerImage},
-      //     {latitude: req.body.markers[i].markerCoordinates.lat},
-      //     {longitude: req.body.markers[i].markerCoordinates.lng},
-      //     {map_id: 1},
-      //     {user_id: 1})
-      //     .then((results) => {
-      //     res.json({ success: true, message: 'ok' });
-      //   })
-      // }
-
-
-
   });
 
-  // router.post("/", (req, res) => {
-  //   // for (let i in req.body.markers) {
-  //     knex('markers')
-  //       .insert (
-  //         {title: req.body.markers.markerTitle},
-  //         {description: req.body.markers.markerDescription},
-  //         {img: req.body.markers.markerImage},
-  //         {latitude: req.body.markers.markerCoordinates.lat},
-  //         {longitude: req.body.markers.markerCoordinates.lng},
-  //         {map_id: 1},
-  //         {user_id: 1})
-  //       // {map_id: knex.from('maps').innerJoin('map_id', 'title', req.body.mapTitle)},
-  //       // {user_id: req.body.user_id}
-  //       .then((results) => {
-  //         res.json({ success: true, message: 'markers uploaded to db'});
-  //     })
-  //   // }
-  // })
+  router.post("/maps/:id" (req, res) => {
+    let markerArr = [];
+    for (let i in req.body.markers) {
+      req.body.markers[i].user_id = req.session.user_id;
+      req.body.markers[i].map_id = req.params.id;
+      markerArr.push(req.body.markers[i]);
+    }
+
+    let chunkSize = markerArr.length;
+
+    knex.batchInsert('markers', markerArr, chunkSize)
+      .returning('id')
+      .then(function() {
+        console.log('Insert is working!')
+      })
+      .catch(function(error) {
+        console.log(error)
+      });
+
+    knex.transaction(function(tr) {
+      return knex.batchInsert('markers', markerArr, chunkSize)
+        .transacting(tr)
+      })
+      .then (function() {
+        console.log('Insert is working!')
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  })
 
   return router;
 }
