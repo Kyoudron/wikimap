@@ -8,22 +8,11 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("maps")
+      .from("users_maps")
       .then((results) => {
         res.json(results);
     });
   });
-
-
-
-  router.post("/", (req, res) => {
-     knex('maps')
-      .insert({title: req.body.mapTitle, creator_id: 2})
-      .then((results)=>{
-        res.json({success: true, message: 'ok' });
-      })
-  });
-
 
   return router;
 }

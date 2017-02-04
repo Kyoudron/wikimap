@@ -78,15 +78,26 @@ navigator.geolocation.getCurrentPosition(function(position) {
 // }
 
 function saveData(location) {
+
   let title = escape(document.getElementById('title').value);
+
   let description = escape(document.getElementById('description').value);
+
   let image = escape(document.getElementById('image').value);
+
   let latlng = location;
-  markers[JSON.stringify(latlng)] = {markerTitle: title, 
-                                    markerDescription: description, 
-                                    markerImage: image, 
+
+  markers[JSON.stringify(latlng)] = {markerTitle: title,
+
+                                    markerDescription: description,
+
+                                    markerImage: image,
+
                                     markerCoordinates: latlng.toJSON()};
+
 }
+
+
 
 
 //ON DOC READY
