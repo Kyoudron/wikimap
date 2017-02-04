@@ -1,8 +1,5 @@
 $(() => {
 
-
-// let $mapTitle = createMapElement(data)
-
   $.ajax({
     method: "GET",
     url: "/api/maps"
@@ -27,7 +24,7 @@ $(() => {
                 <h3>
                     <a href="#">${title}</a>
                 </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                <p></p>
             </div>`
 
     return html;

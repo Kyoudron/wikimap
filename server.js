@@ -17,6 +17,8 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const mapsRoutes = require("./routes/maps");
+const markersRoutes = require("./routes/markers");
+const users_mapsRoutes = require("./routes/users_maps");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -37,8 +39,12 @@ app.use(express.static("public"));
 
 // // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
+
 app.use("/maps", mapsRoutes(knex));
-// app.use(createRoutes(knex)); // what's up with the /api/maps
+app.use("/api/maps", mapsRoutes(knex));
+app.use("/api/markers", markersRoutes(knex));
+app.use("/api/users_maps", users_mapsRoutes(knex));
+
 
 // HOME PAGE
 app.get("/", (req, res) => {
@@ -57,7 +63,19 @@ app.get("/view", (req, res) => {
 
 app.get("/profile", (req, res) => {
   res.render("profile");
-});
+
+})
+
+app.get("/maps/:id", (req, res) => {
+  let templateVars = {
+    mapId: req.params.id,
+    // username: req.session.user_id
+  }
+  res.render("viewedit", templateVars)
+
+	// res.redirect("/profile");
+})
+
 
 
 app.listen(PORT, () => {

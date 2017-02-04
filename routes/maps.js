@@ -15,6 +15,7 @@ module.exports = (knex) => {
     });
   });
 
+
   router.get("/", (req, res) => {
     knex
       .select("*")
@@ -65,6 +66,7 @@ module.exports = (knex) => {
         console.log(error)
       })
   })
+
 
   return router;
 }
