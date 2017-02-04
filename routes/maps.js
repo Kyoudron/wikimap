@@ -26,6 +26,7 @@ module.exports = (knex) => {
     })
   });
 
+
   // router.get("/profile", (req, res) => {
   //   knex
   //     .select("creator_id")
@@ -78,6 +79,31 @@ module.exports = (knex) => {
   //       console.log(error)
   //     })
   // })
+  router.post("/maps/:id", (req, res) => {
+    let markerArr = [];
+    for (let obj in (req.body.markers)) {
+      req.body.markers[obj].user_id = req.cookie;
+      req.body.markers[obj].map_id = req.params.id;
+      markerArr.push(req.body.markers[obj]);
+    }
+
+      console.log(markerArr);
+
+
+    let chunkSize = markerArr.length;
+
+    knex.batchInsert('markers', markerArr, chunkSize)
+      .returning('*')
+      .then(function() {
+        console.log('Insert is working!')
+      })
+      .catch(function(error) {
+        console.log(error)
+      });
+
+
+  })
+
 
 
   return router;

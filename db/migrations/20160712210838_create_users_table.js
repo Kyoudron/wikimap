@@ -18,8 +18,8 @@ exports.up = function(knex, Promise) {
       table.string('img');
       table.decimal('latitude');
       table.decimal('longitude');
-      table.integer('map_id').references('maps.id');
-      table.integer('user_id').references('users.id');
+      table.integer('map_id');//.references('maps.id');
+      table.integer('user_id');//.references('users.id');
     })
     .createTable('users_maps', function(table){
       table.integer('map_id').references('maps.id');
