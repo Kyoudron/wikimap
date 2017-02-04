@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/login.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="./knex.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6q3h49p_htm4_dL0_HAJsBsoTCiXRTfk&callback=initMap"></script>
+    <script type="text/javascript" src="./google_client.js"></script>
+    <script type="text/javascript" src="./getmap.js"></script>
+  </head>
+  <body>
+  <% include ./partials/_header %>
+
+<!-- for Kapish to push in the map and title section -->
+    <section id="map">
+    </section>
+    
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Wikimap
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+            <div class="col-md-4 portfolio-item">
+                <h3>
+                    <a href="#">Log in</a>
+                </h3>
+                <p>
+                  <table>
+                    <tr>
+                      <form id ="login" method = "POST" action ="/login">
+                        <input name ="email" type ="text" placeholder="email"></input>
+                        <input name ="password" type ="password" placeholder="password"></input>
+                        <br>
+                        <p>
+                        <br>
+                         <input id="loginbutton" type ="submit" value ="Login"></input>
+                        </p>
+                      </form>
+                    </tr>
+                    <br>
+                    <tr>
+                      <p>Don't have an account? <a href="#">Register.</a>
+                    </tr>
+                  </table>  
+                </p>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Wikimap 2017</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+</body>
+</html>
+
