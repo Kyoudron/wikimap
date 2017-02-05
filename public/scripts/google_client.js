@@ -63,7 +63,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
         })
 
         userInfoWindow.open(map, marker);
-        infoWindow.close();
 
         $(".markerSubmit").click(() => saveData(location));
         $(".markerSubmit").click(() => userInfoWindow.close());
@@ -87,25 +86,26 @@ function saveData(location) {
   let image = escape(document.getElementById('image').value);
 
   let latlng = location;
-    markers[JSON.stringify(latlng)] = {
-    title: title,
-    description: description,
-    img: JSON.stringify(image),
-    latitude: (latlng.toJSON()).lat,
-    longitude: (latlng.toJSON()).lng,
-    map_id: 0,
-    user_id: 0
-  };
+
+  markers[JSON.stringify(latlng)] = {markerTitle: title,
+
+                                    markerDescription: description,
+
+                                    markerImage: image,
+
+                                    markerCoordinates: latlng.toJSON()};
+
 }
+
+
 
 
 //ON DOC READY
 $(function() {
-
   initMap();
 
   $('#mapTitle').on('submit', function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     // if ($('#mapTitleText').val() === "") {
     //   alert("Please give your map a title!")
     //   return;
@@ -118,17 +118,8 @@ $(function() {
       markers: markers
     }
 
-    $.ajax('/maps', {method: "post", data: formData})
-
+    $.ajax('/create', {method: "post", data: JSON.stringify(formData)})
   })
 
-$('#savemarkers').on('click', function(event) {
-  event.preventDefault();
-  const formData = {
-    markers: markers
-  }
-
-  $.ajax('maps/:id', {method: "post", data: formData})
-  })
-
+// console.log(mapTitle)
 });
