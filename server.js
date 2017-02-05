@@ -20,7 +20,6 @@ var cookieParser = require('cookie-parser')
 const usersRoutes = require("./routes/users");
 const markersRoutes = require("./routes/markers");
 const users_mapsRoutes = require("./routes/users_maps");
-const profileMaps = require("./routes/profilemaps");
 const mapsRoutes = require("./routes/maps");
 const profileMaps = require("./routes/profilemaps")
 // const checkIfLoggedIn = require("./routes/checkIfLoggedIn");
