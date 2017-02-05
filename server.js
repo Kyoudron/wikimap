@@ -71,7 +71,7 @@ app.get("/view", (req, res) => {
   res.render("viewedit", templateVars);
 })
 
-app.get("/profile/:id", (req, res) => {
+app.get("/profile", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
     loggedIn: loggedIn,
@@ -113,6 +113,19 @@ app.post("/login", (req, res) => {
         res.send(`Please try again. Email and password do not match. <a href="/login">Back.</a>`);
     })
 });
+
+// this redirects to the specific map
+app.get("/maps/:id", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res)
+  let templateVars = {
+    mapId: req.params.id,
+    loggedIn: loggedIn,
+  }
+  res.render("viewedit", templateVars)
+
+  // res.redirect("/profile");
+})
+
 app.post("/logout", (req, res) => {
   let templateVars = {}
   // res.cookie('cookieName', {expires: 1});
