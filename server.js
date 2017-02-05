@@ -37,9 +37,8 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-
-// // Mount all resource routes
 app.use(express.static("public"));
+// // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/maps", mapsRoutes(knex));
 app.use("/api/profilemaps", profileMaps(knex));
@@ -47,9 +46,7 @@ app.use("/api/profilemaps", profileMaps(knex));
 function checkIfLoggedIn(req, res) {
     if (req.cookies.cookieName) {
         return true;
-      } else {
-        return false;
-      }
+    }
 }
 
 // ALL GET REQUEST!
@@ -67,47 +64,10 @@ app.get("/", (req, res) => {
 
 //CREATE PAGE
 app.get("/maps/new", (req, res) => {
-  let loggedIn = checkIfLoggedIn(req, res);
-  let templateVars = {
-    mapId: req.params.id,
-    loggedIn: loggedIn
-  }
-  res.render("create", templateVars);
-});
-
-app.get("/view", (req, res) => {
-  let loggedIn = checkIfLoggedIn(req, res);
-  let templateVars = {
-    mapId: req.params.id,
-    loggedIn : loggedIn
-  }
-  res.render("viewedit", templateVars);
-});
-
-
-app.get("/maps/:id", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
-  let templateVars = {
-    mapId: req.params.id,
-    loggedIn : loggedIn
+  if(loggedIn === undefined) {
+    res.redirect("/login")
   }
-
-  res.render("viewedit", templateVars)
-})
-
-//NOTE: Claire added a post here -- do we need this
-app.post("/map/:id", (req, res) => {
-  let loggedIn = checkIfLoggedIn(req, res)
-  let templateVars = {
-    mapId: req.params.id,
-    loggedIn: loggedIn
-  }
-  res.render("/map/:id", templateVars);
-});
-
-//create isn't a page any more -- delete this get and post
-app.get("/create", (req, res) => {
-  let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
     mapId: req.params.id,
     loggedIn: loggedIn
@@ -115,21 +75,7 @@ app.get("/create", (req, res) => {
   res.render("create", templateVars);
 })
 
-app.post("/create", (req, res) => {
-    res.redirect("/profile");
-});
-
-//do we need this page
-app.get("/view", (req, res) => {
-  let loggedIn = checkIfLoggedIn(req, res)
-  let templateVars = {
-    loggedIn: loggedIn
-  }
-  res.render("viewedit", templateVars);
-})
-
-//going to have to be profile/:id
-
+// PROFILE PAGE
 app.get("/profile", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
@@ -138,7 +84,6 @@ app.get("/profile", (req, res) => {
   }
   res.render("profile", templateVars);
 })
-
 // Routes for user-authentification
 app.get("/login", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
@@ -210,15 +155,3 @@ app.post("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
-
-
-// this redirects to the specific map
-app.get("/maps/:id", (req, res) => {
-  let loggedIn = checkIfLoggedIn(req, res)
-  let mapId= req.params.mapId;
-  let templateVars = {
-    mapId: mapId,
-    loggedIn: loggedIn,
-  }
-  res.render("viewedit", templateVars)
-})
