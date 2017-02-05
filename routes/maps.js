@@ -82,12 +82,13 @@ module.exports = (knex) => {
   router.post("/maps/:id", (req, res) => {
     let markerArr = [];
     for (let obj in (req.body.markers)) {
-      req.body.markers[obj].user_id = req.cookie;
+      req.body.markers[obj].user_id = req.cookies.cookieName;
       req.body.markers[obj].map_id = req.params.id;
       markerArr.push(req.body.markers[obj]);
     }
+    console.log(req);
 
-      console.log(markerArr);
+    console.log(markerArr);
 
 
     let chunkSize = markerArr.length;

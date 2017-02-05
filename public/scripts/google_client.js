@@ -88,15 +88,12 @@ function saveData(location) {
   let latlng = location;
 
 
-  markers[JSON.stringify(latlng)] = {markerTitle: title,
-
-                                    markerDescription: description,
-
-                                    markerImage: image,
-
-                                    markerCoordinates: latlng.toJSON()};
-
-}
+  // markers[JSON.stringify(latlng)] =
+  //   { markerTitle: title,
+  //   markerDescription: description,
+  //   markerImage: image,
+  //   markerCoordinates: latlng.toJSON()};
+  // }
 
 
 
@@ -109,9 +106,9 @@ function saveData(location) {
     map_id: 0,
     user_id: 0
   };
+
+
 }
-
-
 
 //ON DOC READY
 $(function() {
@@ -141,12 +138,11 @@ $(function() {
 
 $('#savemarkers').on('click', function(event) {
   event.preventDefault();
-  const formData = {
-    markers: markers
-  }
+    const formData = {
+      markers: markers
+    }
 
   $.ajax('maps/:id', {method: "post", data: formData})
 
   })
-
 });
