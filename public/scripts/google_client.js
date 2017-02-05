@@ -78,21 +78,13 @@ navigator.geolocation.getCurrentPosition(function(position) {
 // }
 
 function saveData(location) {
-
   let title = escape(document.getElementById('title').value);
-
   let description = escape(document.getElementById('description').value);
-
   let image = escape(document.getElementById('image').value);
-
   let latlng = location;
-
   markers[JSON.stringify(latlng)] = {markerTitle: title,
-
                                     markerDescription: description,
-
                                     markerImage: image,
-
                                     markerCoordinates: latlng.toJSON()};
 
 }
@@ -104,22 +96,22 @@ function saveData(location) {
 $(function() {
   initMap();
 
-  $('#mapTitle').on('submit', function(event) {
-    // event.preventDefault();
-    // if ($('#mapTitleText').val() === "") {
-    //   alert("Please give your map a title!")
-    //   return;
-    // };
-    let mapTitle = $('#mapTitleText').val();
-    // //modify map obj
-    // map[JSON.stringify(mapTitle)] = markers;
-    const formData = {
-      mapTitle: mapTitle,
-      markers: markers
-    }
+  // $('#mapTitle').on('submit', function(event) {
+  //   // event.preventDefault();
+  //   // if ($('#mapTitleText').val() === "") {
+  //   //   alert("Please give your map a title!")
+  //   //   return;
+  //   // };
+  //   let mapTitle = $('#mapTitleText').val();
+  //   // //modify map obj
+  //   // map[JSON.stringify(mapTitle)] = markers;
+  //   const formData = {
+  //     mapTitle: mapTitle,
+  //     markers: markers
+  //   }
 
-    $.ajax('/create', {method: "post", data: JSON.stringify(formData)})
-  })
+  //   $.ajax('/maps/test', {method: "post", data: JSON.stringify(formData)})
+  // })
 
 // console.log(mapTitle)
 });

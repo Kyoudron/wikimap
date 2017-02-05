@@ -15,7 +15,6 @@ module.exports = (knex) => {
   });
 
 
-
   router.post("/", (req, res) => {
   console.log(req.body);
     knex('maps')
@@ -93,7 +92,6 @@ module.exports = (knex) => {
 
 
   })
-
 
 
   return router;

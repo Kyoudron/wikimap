@@ -18,12 +18,8 @@ var cookieParser = require('cookie-parser')
 // const hashed_password = bcrypt.hashSync(password, 10);
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
-const markersRoutes = require("./routes/markers");
-const users_mapsRoutes = require("./routes/users_maps");
-const profileMaps = require("./routes/profilemaps");
 const mapsRoutes = require("./routes/maps");
-
-
+const profileMaps = require("./routes/profilemaps")
 // const checkIfLoggedIn = require("./routes/checkIfLoggedIn");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -33,6 +29,7 @@ app.use(morgan('dev'));
 app.use(knexLogger(knex));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -54,10 +51,15 @@ function checkIfLoggedIn(req, res) {
         return false;
       }
 }
+
+// ALL GET REQUEST!
+
+
 // HOME PAGE
 app.get("/", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
+    mapId: req.params.id,
     loggedIn: loggedIn
   }
   res.render("index", templateVars);
@@ -76,7 +78,8 @@ app.get("/maps/new", (req, res) => {
 app.get("/view", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res);
   let templateVars = {
-    mapId: req.params.id
+    mapId: req.params.id,
+    loggedIn : loggedIn
   }
   res.render("viewedit", templateVars);
 });
@@ -86,9 +89,9 @@ app.get("/maps/:id", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
     mapId: req.params.id,
-    loggedIn: loggedIn
-    // username: req.session.user_id
+    loggedIn : loggedIn
   }
+
   res.render("viewedit", templateVars)
 })
 
@@ -106,6 +109,7 @@ app.post("/map/:id", (req, res) => {
 app.get("/create", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
+    mapId: req.params.id,
     loggedIn: loggedIn
   }
   res.render("create", templateVars);
@@ -125,24 +129,53 @@ app.get("/view", (req, res) => {
 })
 
 //going to have to be profile/:id
+
 app.get("/profile", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
-    loggedIn: loggedIn,
-    profileId: req.params.id,
+    mapId: req.params.id,
+    loggedIn: loggedIn
   }
   res.render("profile", templateVars);
 })
-
 
 // Routes for user-authentification
 app.get("/login", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
+    mapId: req.params.id,
     loggedIn: loggedIn
   }
   res.render("login", templateVars);
 });
+// this redirects to the specific map
+app.get("/maps/:id", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res)
+  let templateVars = {
+    mapId: req.params.id,
+    loggedIn: loggedIn,
+  }
+  res.render("viewedit", templateVars)
+})
+
+
+// ALL POST REQUEST!
+
+app.post("/maps", (req, res) => {
+  console.log(req.body.title)
+    knex('maps')
+      .insert (
+      {title: req.body.title, creator_id: req.cookies.cookieName})
+      .returning('id')
+      .then((results) => {
+        // console.log(results)
+  res.redirect(`/maps/${results}`)
+      // res.json({ success: true, message: 'ok', id: results });
+  // let redirect_url = `/maps/${id[0]}`
+  // res.send(200)
+  });
+});
+
 app.post("/login", (req, res) => {
   if (req.body.email === "" || req.body.password === "") {
     res.status(400);
@@ -167,6 +200,7 @@ app.post("/login", (req, res) => {
     })
 });
 
+
 app.post("/logout", (req, res) => {
   let templateVars = {}
   // res.cookie('cookieName', {expires: 1});
@@ -176,6 +210,7 @@ app.post("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+
 
 // this redirects to the specific map
 app.get("/maps/:id", (req, res) => {
@@ -187,4 +222,3 @@ app.get("/maps/:id", (req, res) => {
   }
   res.render("viewedit", templateVars)
 })
-
