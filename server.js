@@ -113,13 +113,32 @@ app.post("/maps", (req, res) => {
       {title: req.body.title, creator_id: req.cookies.cookieName})
       .returning('id')
       .then((results) => {
-        // console.log(results)
   res.redirect(`/maps/${results}`)
-      // res.json({ success: true, message: 'ok', id: results });
-  // let redirect_url = `/maps/${id[0]}`
-  // res.send(200)
   });
 });
+
+app.post("/maps/:id/markers", (req, res) => {
+    console.log(req.body);
+    let markerArr = [];
+    for (let obj in (req.body.markers)) {
+      req.body.markers[obj].user_id = req.cookies.cookieName;
+      req.body.markers[obj].map_id = ((req.headers.referer).substr(27, req.headers.referer.length));
+      markerArr.push(req.body.markers[obj]);
+    }
+    console.log(markerArr);
+
+    let chunkSize = markerArr.length;
+
+    knex.batchInsert('markers', markerArr, chunkSize)
+      .returning('*')
+      .then(function() {
+        console.log('Insert is working!')
+      })
+      .catch(function(error) {
+        console.log(error)
+    });
+})
+
 
 app.post("/login", (req, res) => {
   if (req.body.email === "" || req.body.password === "") {
@@ -154,4 +173,5 @@ app.post("/logout", (req, res) => {
 });
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
+
 });
