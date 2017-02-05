@@ -40,8 +40,9 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(express.static("public"));
+
 // // Mount all resource routes
+app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/maps", mapsRoutes(knex));
 app.use("/api/profilemaps", profileMaps(knex));
@@ -49,7 +50,9 @@ app.use("/api/profilemaps", profileMaps(knex));
 function checkIfLoggedIn(req, res) {
     if (req.cookies.cookieName) {
         return true;
-    }
+      } else {
+        return false;
+      }
 }
 // HOME PAGE
 app.get("/", (req, res) => {
@@ -59,17 +62,23 @@ app.get("/", (req, res) => {
   }
   res.render("index", templateVars);
 });
+
 //CREATE PAGE
 app.get("/maps/new", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res);
   let templateVars = {
     mapId: req.params.id,
-    // username: req.session.user_id
+    loggedIn: loggedIn
   }
   res.render("create", templateVars);
 });
 
 app.get("/view", (req, res) => {
-  res.render("viewedit");
+  let loggedIn = checkIfLoggedIn(req, res);
+  let templateVars = {
+    mapId: req.params.id
+  }
+  res.render("viewedit", templateVars);
 });
 
 
@@ -81,10 +90,19 @@ app.get("/maps/:id", (req, res) => {
     // username: req.session.user_id
   }
   res.render("viewedit", templateVars)
-
 })
 
+//NOTE: Claire added a post here -- do we need this
+app.post("/map/:id", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res)
+  let templateVars = {
+    mapId: req.params.id,
+    loggedIn: loggedIn
+  }
+  res.render("/map/:id", templateVars);
+});
 
+//create isn't a page any more -- delete this get and post
 app.get("/create", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
@@ -92,6 +110,12 @@ app.get("/create", (req, res) => {
   }
   res.render("create", templateVars);
 })
+
+app.post("/create", (req, res) => {
+    res.redirect("/profile");
+});
+
+//do we need this page
 app.get("/view", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
@@ -100,6 +124,7 @@ app.get("/view", (req, res) => {
   res.render("viewedit", templateVars);
 })
 
+//going to have to be profile/:id
 app.get("/profile", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
@@ -108,9 +133,8 @@ app.get("/profile", (req, res) => {
   }
   res.render("profile", templateVars);
 })
-app.post("/create", (req, res) => {
-    res.redirect("/profile");
-});
+
+
 // Routes for user-authentification
 app.get("/login", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
@@ -143,18 +167,6 @@ app.post("/login", (req, res) => {
     })
 });
 
-// this redirects to the specific map
-app.get("/maps/:id", (req, res) => {
-  let loggedIn = checkIfLoggedIn(req, res)
-  let templateVars = {
-    mapId: req.params.id,
-    loggedIn: loggedIn,
-  }
-  res.render("viewedit", templateVars)
-
-  // res.redirect("/profile");
-})
-
 app.post("/logout", (req, res) => {
   let templateVars = {}
   // res.cookie('cookieName', {expires: 1});
@@ -164,3 +176,15 @@ app.post("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+
+// this redirects to the specific map
+app.get("/maps/:id", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res)
+  let mapId= req.params.mapId;
+  let templateVars = {
+    mapId: mapId,
+    loggedIn: loggedIn,
+  }
+  res.render("viewedit", templateVars)
+})
+

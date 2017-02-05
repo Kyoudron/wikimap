@@ -24,6 +24,7 @@ $.ajax({
     $('.maprow').html(html);
   });
 
+//a href is going to be to the map/:id page
 
   function profileMapElement(map){
     let title = map.title;
@@ -42,6 +43,7 @@ $.ajax({
     return html;
   }
 
+//a href is going to be to the map/:id page
 
   function createMapElement(map){
     let title = map.title;

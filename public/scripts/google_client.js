@@ -19,7 +19,7 @@ function initMap() {
     map: map
   });
 
-// zooming in on current location
+// zooming in on current location -- if user allows location services
 
 if (navigator.geolocation) {
 navigator.geolocation.getCurrentPosition(function(position) {
