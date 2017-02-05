@@ -27,17 +27,6 @@ module.exports = (knex) => {
   });
 
 
-  router.get("/profile", (req, res) => {
-    knex
-      .select("creator_id")
-      .from("maps")
-      .where({creator_id: 3})
-      .then((results) => {
-        res.json(results);
-    });
-  });
-
-
 
   router.get("/", (req, res) => {
     knex
