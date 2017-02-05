@@ -28,17 +28,13 @@ $.ajax({
 
   function profileMapElement(map){
     let title = map.title;
+    let id = map.id;
 
     let html = `
-            <div class="col-md-4 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
                 <h3>
-                    <a href="maps/<%mapId%>">${title}</a>
+                    <a href="/maps/${id}">${title}</a>
                 </h3>
-                <p></p>
-            </div>`
+          `
 
     return html;
   }
@@ -47,17 +43,13 @@ $.ajax({
 
   function createMapElement(map){
     let title = map.title;
+    let id = map.id
 
     let html = `
-            <div class="col-md-4 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
                 <h3>
-                    <a href="maps/<%mapId%>">${title}</a>
+                    <a href="/maps/${id}">${title}</a>
                 </h3>
-                <p></p>
-            </div>`
+`
 
     return html;
   }

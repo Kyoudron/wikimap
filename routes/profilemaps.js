@@ -9,16 +9,11 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("maps")
-      .where({creator_id: 3})
-      // cookieName
-
+      .where({creator_id: req.cookies.cookieName})
       .then((results) => {
         res.json(results);
     });
   });
-
-
-
 
   return router;
 }
