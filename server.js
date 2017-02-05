@@ -111,6 +111,20 @@ app.post("/login", (req, res) => {
         res.send(`Please try again. Email and password do not match. <a href="/login">Back.</a>`);
     })
 });
+
+// this redirects to the specific map
+app.get("/maps/:id", (req, res) => {
+  let templateVars = {
+    mapId: req.params.id,
+  }
+  res.render("viewedit", templateVars)
+
+  // res.redirect("/profile");
+})
+
+
+
+
 app.post("/logout", (req, res) => {
   let templateVars = {}
   // res.cookie('cookieName', {expires: 1});
