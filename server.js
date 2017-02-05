@@ -20,8 +20,10 @@ var cookieParser = require('cookie-parser')
 const usersRoutes = require("./routes/users");
 const markersRoutes = require("./routes/markers");
 const users_mapsRoutes = require("./routes/users_maps");
+const profileMaps = require("./routes/profilemaps");
 const mapsRoutes = require("./routes/maps");
-const profileMaps = require("./routes/profilemaps")
+
+
 // const checkIfLoggedIn = require("./routes/checkIfLoggedIn");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -58,6 +60,31 @@ app.get("/", (req, res) => {
   res.render("index", templateVars);
 });
 //CREATE PAGE
+app.get("/maps/new", (req, res) => {
+  let templateVars = {
+    mapId: req.params.id,
+    // username: req.session.user_id
+  }
+  res.render("create", templateVars);
+});
+
+app.get("/view", (req, res) => {
+  res.render("viewedit");
+});
+
+
+app.get("/maps/:id", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res)
+  let templateVars = {
+    mapId: req.params.id,
+    loggedIn: loggedIn
+    // username: req.session.user_id
+  }
+  res.render("viewedit", templateVars)
+
+})
+
+
 app.get("/create", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
@@ -137,4 +164,3 @@ app.post("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
-
