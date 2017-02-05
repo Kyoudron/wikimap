@@ -24,6 +24,20 @@ $.ajax({
     $('.maprow').html(html);
   });
 
+$.ajax({
+    method: "GET",
+    url: "/api/profilefav"
+    })
+    .done((maps) => {
+    html = '';
+    for(let map of maps) {
+      html += profileMapElement(map);
+    }
+    $('.favrow').html(html);
+  });
+
+
+
 //a href is going to be to the map/:id page
 
   function profileMapElement(map){

@@ -19,7 +19,7 @@ module.exports = (knex) => {
   console.log(req.body);
     knex('maps')
       .insert (
-      {title: req.body.mapTitle, creator_id: 2})
+      {title: req.body.mapTitle, creator_id: req.cookies.cookieName})
       .then((results) => {
       res.json({ success: true, message: 'ok' });
     })

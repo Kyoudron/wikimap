@@ -20,6 +20,7 @@ var cookieParser = require('cookie-parser')
 const usersRoutes = require("./routes/users");
 const mapsRoutes = require("./routes/maps");
 const profileMaps = require("./routes/profilemaps")
+const profileFav = require("./routes/profilefav")
 // const checkIfLoggedIn = require("./routes/checkIfLoggedIn");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -42,6 +43,7 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/maps", mapsRoutes(knex));
 app.use("/api/profilemaps", profileMaps(knex));
+app.use("/api/profilefav", profileFav(knex));
 
 function checkIfLoggedIn(req, res) {
     if (req.cookies.cookieName) {
@@ -116,6 +118,15 @@ app.post("/maps", (req, res) => {
   res.redirect(`/maps/${results}`)
   });
 });
+
+app.post("/profile", (req, res)=>{
+    console.log(req.body)
+    knex('users_maps')
+      .insert({map_id: req.body.mapId, user_id: req.cookies.cookieName, favourites: true})
+      .then((results) => {
+    res.redirect('/profile')
+    });
+  })
 
 app.post("/maps/:id/markers", (req, res) => {
     console.log(req.body);
