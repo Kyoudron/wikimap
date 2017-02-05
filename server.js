@@ -61,8 +61,10 @@ app.get("/", (req, res) => {
 });
 //CREATE PAGE
 app.get("/maps/new", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
     mapId: req.params.id,
+    loggedIn: loggedIn
     // username: req.session.user_id
   }
   res.render("create", templateVars);
@@ -104,7 +106,7 @@ app.get("/profile", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
     loggedIn: loggedIn,
-    profileId: req.params.id,
+    profileId: req.params.id
   }
   res.render("profile", templateVars);
 })
@@ -148,7 +150,7 @@ app.get("/maps/:id", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
     mapId: req.params.id,
-    loggedIn: loggedIn,
+    loggedIn: loggedIn
   }
   res.render("viewedit", templateVars)
 
