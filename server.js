@@ -72,10 +72,6 @@ app.get("/view", (req, res) => {
   res.render("viewedit");
 });
 
-app.get("/profile", (req, res) => {
-  res.render("profile");
-
-})
 
 app.get("/maps/:id", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
