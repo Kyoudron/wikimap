@@ -33,6 +33,7 @@ app.use(morgan('dev'));
 app.use(knexLogger(knex));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -51,16 +52,23 @@ function checkIfLoggedIn(req, res) {
         return true;
     }
 }
+
+// ALL GET REQUEST!
+
+
 // HOME PAGE
 app.get("/", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
+    mapId: req.params.id,
     loggedIn: loggedIn
   }
   res.render("index", templateVars);
 });
+
 //CREATE PAGE
 app.get("/maps/new", (req, res) => {
+<<<<<<< HEAD
   let templateVars = {
     mapId: req.params.id,
     // username: req.session.user_id
@@ -86,39 +94,73 @@ app.get("/maps/:id", (req, res) => {
 
 
 app.get("/create", (req, res) => {
+=======
+>>>>>>> featureprofile
   let loggedIn = checkIfLoggedIn(req, res)
+  if(loggedIn === undefined) {
+    res.redirect("/login")
+  }
   let templateVars = {
+    mapId: req.params.id,
     loggedIn: loggedIn
   }
   res.render("create", templateVars);
 })
-app.get("/view", (req, res) => {
-  let loggedIn = checkIfLoggedIn(req, res)
-  let templateVars = {
-    loggedIn: loggedIn
-  }
-  res.render("viewedit", templateVars);
-})
 
+<<<<<<< HEAD
 app.get("/profile", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
     loggedIn: loggedIn,
     profileId: req.params.id,
+=======
+// PROFILE PAGE
+app.get("/profile", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res)
+  let templateVars = {
+    mapId: req.params.id,
+    loggedIn: loggedIn
+>>>>>>> featureprofile
   }
   res.render("profile", templateVars);
 })
-app.post("/create", (req, res) => {
-    res.redirect("/profile");
-});
 // Routes for user-authentification
 app.get("/login", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
   let templateVars = {
+    mapId: req.params.id,
     loggedIn: loggedIn
   }
   res.render("login", templateVars);
 });
+// this redirects to the specific map
+app.get("/maps/:id", (req, res) => {
+  let loggedIn = checkIfLoggedIn(req, res)
+  let templateVars = {
+    mapId: req.params.id,
+    loggedIn: loggedIn,
+  }
+  res.render("viewedit", templateVars)
+})
+
+
+// ALL POST REQUEST!
+
+app.post("/maps", (req, res) => {
+  console.log(req.body.title)
+    knex('maps')
+      .insert (
+      {title: req.body.title, creator_id: req.cookies.cookieName})
+      .returning('id')
+      .then((results) => {
+        // console.log(results)
+  res.redirect(`/maps/${results}`)
+      // res.json({ success: true, message: 'ok', id: results });
+  // let redirect_url = `/maps/${id[0]}`
+  // res.send(200)
+  });
+});
+
 app.post("/login", (req, res) => {
   if (req.body.email === "" || req.body.password === "") {
     res.status(400);
@@ -143,6 +185,7 @@ app.post("/login", (req, res) => {
     })
 });
 
+<<<<<<< HEAD
 // this redirects to the specific map
 app.get("/maps/:id", (req, res) => {
   let loggedIn = checkIfLoggedIn(req, res)
@@ -154,6 +197,8 @@ app.get("/maps/:id", (req, res) => {
 
   // res.redirect("/profile");
 })
+=======
+>>>>>>> featureprofile
 
 app.post("/logout", (req, res) => {
   let templateVars = {}
