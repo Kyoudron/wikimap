@@ -72,11 +72,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
   });
 }
 
-// function saveMapTitle(mapTitle) {
-//   let mapTitle = escape(document.getElementById('mapTitle').value)
-//   return mapTitle;
-// }
-
 function saveData(location) {
   let title = escape(document.getElementById('title').value);
   let description = escape(document.getElementById('description').value);
