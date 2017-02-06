@@ -167,7 +167,6 @@ app.post("/login", (req, res) => {
           let user = results[0]
               if (req.body.password === user.password) {
               let cookieValue = user.id;
-              // let cookieValue = user.email;
               res.cookie('cookieName', cookieValue);
               res.redirect("/")
             } else {
