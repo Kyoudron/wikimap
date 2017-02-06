@@ -101,9 +101,7 @@ $.ajax({
     .done((markers) => {
       html = '';
       for (let marker of markers) {
-        let lat = parseInt(markers[marker.latitude]);
-        let lng = parseInt(markers[marker.longitude]);
-        let myLatLng = new google.maps.LatLng(lat, lng);
+        let myLatLng = new google.maps.LatLng(parseInt(markers[marker.latitude]), parseInt(markers[marker.longitude]));
         let newmarker = new google.maps.Marker({
           position: myLatLng
         })
