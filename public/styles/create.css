@@ -3,12 +3,6 @@
   width: 65%;
 }
 
-#mapname {
-	position: absolute;
-	left: 850px;
-	top: 160px;
-}
-
 .textbox{
   position: absolute;
   left: 880px;
@@ -19,7 +13,7 @@
   width: 47px;
 }
 
-#titlesubmit {
+/*#titlesubmit {
 	display: inline;
 	height: 25px;
 }
@@ -34,7 +28,7 @@
 	margin-top: 240px;
 	height: 25px;
 	float: right;
-}
+}*/
 
 html #createmap {
   margin: 0 5%;
