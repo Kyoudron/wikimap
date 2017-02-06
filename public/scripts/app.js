@@ -64,10 +64,25 @@ console.log(markers)
       let lat = markers[i].latitude;
       let lng = markers[i].longitude;
       let myLatLng = new google.maps.LatLng(lat, lng);
-      var marker = new google.maps.Marker({
-      position: myLatLng,
-      });
-      marker.setMap(map)
+
+      (function() {
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map:map
+        // title: markers[i].title;
+        });
+
+        marker.info = new google.maps.InfoWindow({
+          content: ((markers[i].title).replace(/[^a-z]/gmi, " ").replace(/\s+/g, " "))
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          marker.info.open(map, marker)
+        });
+
+      })();
+
+      // marker.setMap(map);
     }
 
 // var marker2 = new google.maps.Marker({
@@ -133,9 +148,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
 }
 
 
-
-
-
 // favorites
   function faveMapElement(map){
     let title = map.title;
@@ -149,8 +161,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
     return html;
   }
-
-
 
 
 //a href is going to be to the map/:id page
