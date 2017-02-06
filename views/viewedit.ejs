@@ -14,9 +14,6 @@
 
     <!-- Page Content -->
     <div class="container">
-            <div class="textbox">
-              <button id ="savemarkers">Save</button>
-            </div>
          <!-- Page Header -->
         <div class="row">
             <div class="col-lg-12">
@@ -35,10 +32,12 @@
         <div class ="maplatlng">
 
         </div>
-
         <div class="textbox">
+        <form id ="savemarkers" method="POST" action="/map/:id">
+          <input type="submit" value="Save" class="btn btn-default btn-sm"></input>
+        </form>
           <form id ="favourite" method="POST" action="/profile">
-            <input id= "favebutton" type="submit" value="<%=`${mapId}`%>" name ="mapId"></input>
+            <input id= "favebutton" type="submit" value="<%=`${mapId}`%>" name ="mapId" class="btn btn-default btn-sm"></input> Click to favourite this map!
           </form>
         </div>
 

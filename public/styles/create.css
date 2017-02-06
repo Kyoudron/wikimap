@@ -9,6 +9,16 @@
 	top: 160px;
 }
 
+.textbox{
+  position: absolute;
+  left: 880px;
+  top: 180px;
+}
+
+#favebutton{
+  width: 47px;
+}
+
 #titlesubmit {
 	display: inline;
 	height: 25px;
