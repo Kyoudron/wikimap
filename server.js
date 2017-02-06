@@ -105,6 +105,7 @@ app.get("/maps/:id", (req, res) => {
   let templateVars = {
     mapId: req.params.id,
     loggedIn: loggedIn,
+    username: req.cookies.username
   }
   res.render("viewedit", templateVars)
 })
@@ -167,8 +168,10 @@ app.post("/login", (req, res) => {
           let user = results[0]
               if (req.body.password === user.password) {
               let cookieValue = user.id;
-              // let cookieValue = user.email;
+              let name = user.email;
               res.cookie('cookieName', cookieValue);
+              res.cookie('username', name)
+
               res.redirect("/")
             } else {
               res.redirect("/login");
@@ -184,6 +187,7 @@ app.post("/logout", (req, res) => {
   let templateVars = {}
   // res.cookie('cookieName', {expires: 1});
   res.clearCookie('cookieName');
+  res.clearCookie('username')
   res.redirect('/login');
 });
 app.listen(PORT, () => {
