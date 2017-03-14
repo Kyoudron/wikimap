@@ -49,7 +49,7 @@ $.ajax({
 
 
 function markerMapElement(markers){
-console.log(markers)
+  console.log(markers)
     var mapOptions = {
       zoom: 12,
       center: {lat: 43.6532, lng: -79.3832},
@@ -84,12 +84,6 @@ console.log(markers)
 
       // marker.setMap(map);
     }
-
-// var marker2 = new google.maps.Marker({
-//       position :{lat: 43.6532, lng: -79.3832}
-//   });
-//   marker2.setMap(map)
-
 
 
 if (navigator.geolocation) {
@@ -138,13 +132,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
     }
     addMarker(event.latLng);
   });
-    let html = `
-                  <h3>
-                      ${lat} ${lng}
-                  </h3>
-              `
+    let html = `<h3>${lat} ${lng}</h3>`
     return html;
-
 }
 
 
@@ -153,12 +142,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
     let title = map.title;
     let id = map.id;
 
-    let html = `
-                <h3>
-                    <a href="/maps/${id}">${title}</a>
-                </h3>
-          `
-
+    let html = `<h3><a href="/maps/${id}">${title}</a></h3>`
     return html;
   }
 
@@ -168,11 +152,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
     let title = map.title;
     let id = map.id;
 
-    let html = `
-                <h3>
-                    <a href="/maps/${id}">${title}</a>
-                </h3>
-          `
+    let html = `<h3><a href="/maps/${id}">${title}</a></h3>`
     return html;
   }
 
@@ -182,11 +162,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
     let title = map.title;
     let id = map.id
 
-    let html = `
-                <h3>
-                    <a href="/maps/${id}">${title}</a>
-                </h3>
-`
+    let html = `<h3><a href="/maps/${id}">${title}</a></h3>`
     return html;
   }
 
